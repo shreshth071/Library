@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Book Management</title>
+    <style>
+        /* General Body Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #023e8a, #ade8f4); /* Blue gradient background */
+        }
+
+        /* Flexbox Layout for Form and 3D Animation */
+        .wrapper {
+            display: flex;
+            align-items: flex-start; /* Align items at the top */
+            justify-content: center;
+            gap: 30px;
+        }
+
+        /* Form Container Styles */
+        .container {
+            max-width: 450px;
+            margin: 40px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.4); /* 40% opacity */
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 10;
+            height: 350px;
+        }
+
+        /* Book Icon */
+        .container img {
+            position: absolute;
+            top: -40px;
+            left: calc(50% - 40px);
+            width: 80px;
+            height: 80px;
+            z-index: 10;
+        }
+
+        .container h1 {
+            margin-bottom: 20px;
+            color: #1b4965; /* Dark blue text color */
+            font-size: 28px;
+            text-align: center;
+        }
+
+        /* Input Styles */
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            background: #f0f8ff; /* Light blue background for input */
+            border: 1px solid #ccc;
+            color: #333;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #023e8a; /* Blue border on focus */
+        }
+
+        /* Button Styles */
+        .container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #023e8a; /* Blue background for button */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            font-weight: bold;
+        }
+
+        .container button:hover {
+            background-color: #0077b6; /* Lighter blue on hover */
+            transform: translateY(-2px);
+        }
+
+        /* Sign-up Link Styles */
+        .signup-link {
+            text-align: center;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        .signup-link a {
+            color: #023e8a; /* Blue link */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* 3D Animation Container */
+        .right-image {
+            position: absolute;
+            top: 0;
+            left: 470px;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .right-image iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 0px;
+            overflow: hidden;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 800px) {
+            .main-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .container, .right-image {
+                width: 90%;
+                margin-top: 20px;
+                top: 50px;
+            }
+
+            .container {
+                padding-top: 80px;
+                height: auto; /* Allow height to adjust for smaller screens */
+            }
+
+            .logo {
+                top: -30px;
+                width: 80px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Form Container -->
+        <div class="container">
+            <div class="logo">
+                <img src="https://img.icons8.com/ios-filled/100/023e8a/open-book.png" alt="Book Icon">
+            </div>
+
+            <h1>Login</h1>
+            <form action="/login/user" method="post">
+                <label for="username"><b>Email</b></label>
+                <input type="text" placeholder="Enter Email" name="username" id="email" required>
+
+                <label for="password"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password" id="password" required>
+
+                <button type="submit" class="loginbtn">Log In</button>
+            </form>
+
+            <div class="signup-link">
+                <p>Don't have an account? <a href="/signup">Sign up</a>.</p>
+            </div>
+        </div>
+
+        <!-- 3D Animation Container -->
+        <div class="right-image">
+            <iframe src='https://my.spline.design/robotinteractiveevents-5864473e1a2171a0a5458b8bd11d54bf/' frameborder='0'></iframe>
+        </div>
+    </div>
+</body>
+
+</html>

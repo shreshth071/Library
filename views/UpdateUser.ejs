@@ -1,0 +1,40 @@
+
+<%- include('./base/header.ejs') %>
+    <div class="container">
+        <div class="alert bg-success my-3">
+            <h4 class="text-center" style="color: aliceblue;">Update Student </h4>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col">
+                <form action="/update/user/<%= user._id %>" method="post">
+                    <label class="form-lable" for="email"><b>Email</b></label>
+                    <input class="form-control" type="text" placeholder="Enter Email" name="email" value="<%= user.email %>" id="email" required>
+    
+                    <label class="form-lable" for="FirstName"><b>First Name</b></label>
+                    <input class="form-control" type="text" placeholder="Enter Name" name="FirstName" value="<%= user.FirstName %>" id="FirstName" required>
+    
+                    <label class="form-lable" for="LastName"><b>Last Name</b></label>
+                    <input class="form-control"  type="text" placeholder="Enter Name" name="LastName" value="<%= user.LastName %>" id="LastName" required>
+    
+                    <label class="form-lable" for="Password"><b>Password</b></label>
+                    <input class="form-control" type="password" placeholder="Enter Password" name="PassWord" value="<%= user.PassWord %>" id="Password" required>
+    
+                    <label class="form-lable" for="Confirm Password"><b>Confirm Password</b></label>
+                    <input class="form-control" type="password" placeholder="Enter Password" name="ConfirmPass" value="<%= user.ConfirmPass %>" id="ConfirmPassword" required>
+    
+                    <label class="form-lable" for="Mobile Number"><b>Mobile Number</b></label>
+                    <input class="form-control" type="number" placeholder="Mobile Number" name="MobileNo" value="<%= user.MobileNo %>" id="MobileNo" required>
+    
+                    <hr>
+                    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+                    <button type="submit" class="registerbtn">Update</button>
+                </form>
+            </div>
+            <div class="col"></div>
+
+        </div>
+    </div>
+<%- include('./base/footer.ejs')%>

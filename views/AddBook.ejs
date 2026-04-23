@@ -1,0 +1,120 @@
+<%- include('./base/header.ejs') %>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+    }
+
+    .content {
+        padding: 20px;
+        background-color: #fff;
+        max-width: 800px;
+        max-height: 600px; /* Set a max height for scrolling */
+        margin: 50px auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow-y: auto; /* Enable vertical scrolling */
+    }
+
+    .content h1 {
+        font-size: 2rem;
+        color: #343a40;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: #495057;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        font-size: 1rem;
+        color: #495057;
+    }
+
+    .form-group input[type="file"] {
+        padding: 0;
+    }
+
+    .submit-btn {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        font-size: 1.1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: block;
+        margin: 20px auto;
+    }
+
+    .submit-btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<%- include('./base/sideBar.ejs') %>
+
+<div style="width: 80%; margin-left: 30%; position: fixed; top: 30px; bottom: -20px;" class="content">
+    <h1>Add New Book</h1>
+    <form action="/book/add" method="POST" enctype="multipart/form-data" >
+        <div class="form-group">
+            <label for="book-title">Book Title</label>
+            <input type="text" id="book-title" name="bookTitle" placeholder="Enter book title" required>
+        </div>
+        <div class="form-group">
+            <label for="publisher">Publisher</label>
+            <input type="text" id="publisher" name="publisher" placeholder="Enter publisher" required>
+        </div>
+        <div class="form-group">
+            <label for="price">Price (USD)</label>
+            <input type="text" id="price" name="price" placeholder="Enter price" required pattern="^\d+(\.\d{1,2})?$" title="Please enter a valid price (e.g., 16.99)">
+        </div>
+        <div class="form-group">
+            <label for="language">Language</label>
+            <input type="text" id="language" name="language" placeholder="Enter language" required>
+        </div>
+        <div class="form-group">
+            <label for="edition">Edition</label>
+            <input type="text" id="edition" name="edition" placeholder="Enter edition" required>
+        </div>
+        <div class="form-group">
+            <label for="noOfPages">Number of Pages</label>
+            <input type="number" id="noOfPages" name="noOfPages" placeholder="Enter number of pages" required min="1">
+        </div>
+        <!-- <div class="form-group">
+            <label for="isbn">ISBN</label>
+            <input type="text" id="isbn" name="isbn" placeholder="Enter ISBN" title="Please enter a valid ISBN (e.g., 978-0062315007)">
+        </div> -->
+        <div class="form-group">
+            <label for="country">Country</label>
+            <input type="text" id="country" name="country" placeholder="Enter country" required>
+        </div>
+        <div class="form-group">
+            <label for="bookImage">Book Image</label>
+            <input type="file"  name="bookImage">
+        </div>
+        <div class="form-group">
+            <label for="authorImage">Author's Image</label>
+            <input type="file"  name="authorImage" >
+        </div>
+        <button  type="submit" class="submit-btn">Add Book</button>
+    </form>
+</div>
+
+<%- include('./base/footer.ejs') %>

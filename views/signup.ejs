@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Book Management</title>
+    <style>
+        /* General Body Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #023e8a, #ade8f4);
+            position: relative;
+        }
+
+        /* Main Container Styles */
+        .main-container {
+            width: 100%;
+            position: fixed;
+        }
+
+        /* Form Container Styles */
+        .container {
+            width: 40%;
+            margin: 20px;
+            padding: 40px;
+            padding-top: 100px;
+            background: rgba(255, 255, 255, 0.4); /* Match the opacity from login page */
+            backdrop-filter: blur(10px);
+            border-radius: 25px; /* More spherical corners */
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 500px;
+            overflow-y: auto; /* Keep scroll bar */
+            z-index: 2;
+            left: 140px;
+        }
+
+        /* Book Icon - Positioned on top of the form */
+        .logo {
+            position: fixed;
+            top: 20px;
+            left: calc(50% - 40px);
+            width: 80px;
+            height: 80px;
+            z-index: 10;
+        }
+
+        /* Form Heading */
+        .container h1 {
+            margin-bottom: 20px;
+            color: #012a4a;
+            font-size: 28px;
+            text-align: center;
+        }
+
+        /* Input Field Styles */
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 10px; /* Rounder input fields */
+            background: rgba(242, 242, 242, 0.8);
+            border: 1px solid #ccc;
+            color: #333;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #023e8a;
+        }
+
+        /* Button Styles */
+        .container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #023e8a;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            font-weight: bold;
+        }
+
+        .container button:hover {
+            background-color: #01497c;
+            transform: translateY(-2px);
+        }
+
+        /* Sign-in Link Styles */
+        .signin-link {
+            text-align: center;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        .signin-link a {
+            color: #023e8a;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .signin-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Right side - 3D Animation Styles */
+        .right-image {
+            position: absolute;
+            top: 0;
+            left: 350px;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .right-image iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 0; /* No border-radius for full screen */
+            overflow: hidden;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 800px) {
+            .main-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .container,
+            .right-image {
+                width: 90%;
+                margin-top: 20px;
+            }
+
+            .container {
+                padding-top: 80px;
+                height: auto;
+            }
+
+            .logo {
+                top: -30px;
+                width: 80px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Main Container -->
+    <div class="main-container">
+
+        <!-- Form Container with Fixed Logo -->
+        <div class="container">
+            <img class="logo" src="https://img.icons8.com/ios-filled/100/023e8a/open-book.png" alt="Book Icon">
+            <h1>Sign Up</h1>
+            <form action="/add/user" method="post">
+                <label for="email"><b>Email</b></label>
+                <input type="email" placeholder="Enter Email" name="email" id="email" required>
+
+                <label for="FirstName"><b>First Name</b></label>
+                <input type="text" placeholder="Enter First Name" name="FirstName" id="FirstName" required>
+
+                <label for="LastName"><b>Last Name</b></label>
+                <input type="text" placeholder="Enter Last Name" name="LastName" id="LastName" required>
+
+                <label for="mobile"><b>Mobile No</b></label>
+                <input type="text" placeholder="Enter Mobile No" name="mobile" id="mobile" required>
+
+                <label for="country"><b>Country</b></label>
+                <input type="text" placeholder="Enter Country" name="country" id="country" required>
+
+                <label for="Password"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="PassWord" id="Password" required>
+
+                <label for="ConfirmPassword"><b>Confirm Password</b></label>
+                <input type="password" placeholder="Confirm Password" name="ConfirmPass" id="ConfirmPassword" required>
+
+                <button type="submit" class="registerbtn">Sign Up</button>
+            </form>
+            <div class="signin-link">
+                <p>Already have an account? <a href="/login">Log in</a>.</p>
+            </div>
+        </div>
+
+        <!-- 3D Animation -->
+        <div class="right-image">
+            <iframe src='https://my.spline.design/robotinteractiveevents-5864473e1a2171a0a5458b8bd11d54bf/' frameborder='0' width='100%' height='100%'></iframe>
+        </div>
+    </div>
+</body>
+
+</html>

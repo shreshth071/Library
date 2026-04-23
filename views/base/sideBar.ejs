@@ -1,0 +1,159 @@
+<style>
+    .sidebar {
+        width: 250px;
+        height: 100vh;
+        background: linear-gradient(135deg, #4b79a1 0%, #283e51 100%); /* Gradient background */
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 56px;
+        left: 0;
+        overflow: auto;
+        color: #fff;
+    }
+    
+    .sidebar-header {
+        text-align: center;
+        padding: 20px 0;
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #f1f1f1; /* Lighter text color for the header */
+        border-bottom: 1px solid #65737e;
+    }
+    
+    .sidebar-menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        margin-top: 20px;
+    }
+    
+    .menu-item {
+        margin-bottom: 15px;
+    }
+    
+    .menu-item a {
+        text-decoration: none;
+        color: #f1f1f1; /* Lighter text color */
+        font-size: 1.2rem;
+        padding: 10px 15px;
+        display: flex;
+        align-items: center;
+        border-radius: 8px;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    }
+    
+    .menu-item a i {
+        margin-right: 10px;
+        font-size: 1.4rem;
+    }
+    
+    .menu-item a:hover {
+        background-color: #5c6bc0; /* Lighter purple on hover */
+        color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add box-shadow for depth */
+    }
+    
+    .menu-item a:hover i {
+        color: #fff; /* White icons on hover */
+    }
+    
+    .menu-item .submenu {
+        list-style: none;
+        padding: 10px;
+        margin-top: 10px;
+        margin-left: 20px;
+        display: none; /* Initially hidden */
+        background-color: #4a6572; /* Slightly darker background for submenu */
+        border-radius: 5px;
+    }
+    
+    .menu-item .submenu li {
+        margin-bottom: 10px;
+    }
+    
+    .menu-item .submenu li a {
+        font-size: 1rem;
+        color: #dfe6e9;
+    }
+    
+    .menu-item.show .submenu {
+        display: block; /* Show submenu when parent li has "show" class */
+    }
+    
+    .sidebar-menu li:last-child {
+        margin-bottom: 0;
+    }
+    
+    /* Scrollbar for the sidebar */
+    .sidebar::-webkit-scrollbar {
+        width: 5px;
+    }
+    
+    .sidebar::-webkit-scrollbar-thumb {
+        background-color: #5c6bc0; /* Scrollbar thumb color */
+        border-radius: 5px;
+    }
+    
+    .sidebar::-webkit-scrollbar-track {
+        background: transparent; /* Transparent scrollbar track */
+    }
+</style>
+
+<!-- Sidebar Container -->
+<div class="sidebar">
+    <div class="sidebar-header">
+        <h2>Admin Dashboard</h2>
+    </div>
+    <ul class="sidebar-menu">
+        <li class="menu-item">
+            <a href="/dashboard">
+                <i class="fas fa-home"></i> <!-- FontAwesome or any icon library -->
+                Dashboard
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="/users">
+                <i class="fas fa-users"></i> <!-- User icon -->
+                Users List
+            </a>
+        </li>
+        <li class="menu-item" id="books-menu">
+            <a href="javascript:void(0)">
+                <i class="fas fa-book"></i> <!-- Book icon -->
+                Books
+                <i class="fas fa-chevron-down" style="margin-left:auto;"></i> <!-- Down arrow icon -->
+            </a>
+            <ul class="submenu">
+                <li>
+                    <a href="/book/add/page">
+                        <i class="fas fa-plus"></i> <!-- New Book icon -->
+                        Add New
+                    </a>
+                </li>
+                <li>
+                    <a href="/books/list">
+                        <i class="fas fa-list"></i> <!-- Book List icon -->
+                        Book List
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a href="/settings">
+                <i class="fas fa-cog"></i> <!-- Settings icon -->
+                Settings
+            </a>
+        </li>
+    </ul>
+</div>
+
+<!-- Script for toggling the dropdown -->
+<script>
+    const booksMenu = document.getElementById('books-menu');
+    booksMenu.addEventListener('click', function() {
+        this.classList.toggle('show');
+    });
+</script>

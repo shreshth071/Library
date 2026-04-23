@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fdf5e6;
+            color: #333;
+        }
+
+        header {
+            background-color: #5b3e28;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* Align items vertically */
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px;
+            border: 1px solid #ddd;
+        }
+
+        .book h2 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .book-image img {
+            width: 100px; /* Set desired width for logo-like appearance */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 5px; /* Optional: Add rounded corners */
+        }
+
+        .book-features {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            margin: 20px;
+        }
+
+        .book-features article {
+            width: 30%;
+            background-color: #faf0e6;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        footer {
+            background-color: #5b3e28;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <%- include('./base/UserNavBar.ejs') %>
+    </header>
+
+    <section class="hero">
+        <div class="book">
+            <h2>Book Reviews</h2>
+            <p>Latest updates and reviews on the best books available for purchase.</p>
+        </div>
+        <div class="book-image">
+            <img src="https://shorturl.at/4Ns9M" alt="Bookshelf">
+        </div>
+    </section>
+
+    <section class="book-features">
+        <article>
+            <h3>Quality Assurance</h3>
+            <p>We ensure that every book meets high standards of quality and relevance.</p>
+        </article>
+        <article>
+            <h3>Diverse Collection</h3>
+            <p>Explore a wide range of genres and topics to suit every reader's interest.</p>
+        </article>
+        <article>
+            <h3>Our Commitment</h3>
+            <p>We are dedicated to providing an exceptional reading experience for all.</p>
+        </article>
+    </section>    
+
+    <footer>
+        <p>&copy; 2024 Book Management System - All Rights Reserved</p>
+    </footer>
+</body>
+</html>

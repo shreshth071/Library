@@ -1,0 +1,10 @@
+<%- include('./base/header.ejs') %>
+
+<div class="main-container">
+    <%- include('./base/sideBar.ejs') %>
+    <div style="margin-top: 50px; margin-left: 250px; position: fixed;" >
+        <h1>Welcome, <%= user.FirstName + " " + user.LastName %>!</h1>
+    </div>
+</div>
+
+<%- include('./base/footer.ejs') %>

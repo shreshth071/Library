@@ -1,0 +1,90 @@
+<%- include('./base/header.ejs') %>
+<style>
+
+
+    .main-container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+    }
+
+    .left-container {
+        padding: 10px;
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: top;
+        background-size: cover; /* Cover the entire container */
+        background-position: center; /* Center the image */
+        background-color:  #3fbbeccb; /* Semi-transparent overlay */
+    }
+
+    .left-container a{
+        margin: 10px;
+    }
+    
+
+    .right-container {
+        width: 80%; /* Takes 60% of the width */
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: top;
+        align-items: center;
+        flex-direction: column; /* Centering content */
+        /* color: #fff; */
+    }
+
+</style>
+<div class="main-container">
+    <div class="left-container">
+      <a href="/users" class="btn btn-outline-success">Users LIst</a>
+      <a href="/books/list" class="btn btn-outline-success">Books</a>
+    </div>
+    <div class="right-container" >
+<style>
+    .button1 {
+        width: 80px; /* Adjust the width as needed */
+        margin-right: 100%;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <table class="table text-center" >
+            <thead>
+                <tr>
+                    <th>email</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>mobileNo</th>
+                    <th>password</th>
+                    <th>Last Login</th>
+                    <th style="padding-left: 7%;" >Actions</th>
+
+                </tr>
+            </thead>
+            <% users.forEach((user)=>{ %>
+                <tr>
+                    <td><%= user.email %></td>
+                    <td><%= user.FirstName %></td>
+                    <td><%= user.LastName %></td>
+                    <td><%= user.MobileNo %></td>
+                    <td><%= user.PassWord %></td>
+                    <td><%= user.lastLogin %></td>
+                    <td><a href="/edit/user/page/<%= user._id %>" class="btn btn-warning button1">edit</a></td>
+                    <td><a href="/delete/user/page/<%= user._id %>" class="btn btn-danger button1">Delete</a></td>
+                </tr>
+           <% }) %>
+        </table>
+    </div>
+</div>
+
+    </div>
+    
+</div>
+
+<%- include('./base/footer.ejs')%>
