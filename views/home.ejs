@@ -1,9 +1,112 @@
 <%- include('./base/header.ejs') %>
 
+<style>
+    .dashboard-content {
+        margin-left: 250px;
+        padding: 80px 40px 40px 40px;
+        background-color: #f8f9fa;
+        min-height: 100vh;
+        width: calc(100% - 250px);
+    }
+
+    .welcome-banner {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+        margin-bottom: 30px;
+    }
+
+    .stat-card {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-left: 5px solid #4e73df;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    }
+
+    .stat-card.books { border-left-color: #1cc88a; }
+    .stat-card.users { border-left-color: #36b9cc; }
+
+    .stat-title {
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: #4e73df;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+
+    .stat-value {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #5a5c69;
+    }
+
+    .stat-icon {
+        float: right;
+        font-size: 2rem;
+        color: #dddfeb;
+    }
+</style>
+
 <div class="main-container">
     <%- include('./base/sideBar.ejs') %>
-    <div style="margin-top: 50px; margin-left: 250px; position: fixed;" >
-        <h1>Welcome, <%= user.FirstName + " " + user.LastName %>!</h1>
+    
+    <div class="dashboard-content">
+        <div class="welcome-banner">
+            <h1>Welcome Administrator!</h1>
+            <p>Here's what's happening in your library today.</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card users">
+                <i class="fas fa-users stat-icon"></i>
+                <div class="stat-title" style="color: #36b9cc;">Total Users</div>
+                <div class="stat-value"><%= typeof stats !== 'undefined' ? stats.users : '...' %></div>
+            </div>
+
+            <div class="stat-card books">
+                <i class="fas fa-book stat-icon"></i>
+                <div class="stat-title" style="color: #1cc88a;">Total Books</div>
+                <div class="stat-value"><%= typeof stats !== 'undefined' ? stats.books : '...' %></div>
+            </div>
+
+            <div class="stat-card">
+                <i class="fas fa-clock stat-icon"></i>
+                <div class="stat-title">System Status</div>
+                <div class="stat-value">Active</div>
+            </div>
+        </div>
+        
+        <!-- Placeholder for recent activity or charts -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Quick Actions</h6>
+                    </div>
+                    <div class="card-body">
+                        <a href="/book/add/page" class="btn btn-primary mr-2">Add New Book</a>
+                        <a href="/users" class="btn btn-info mr-2">Manage Users</a>
+                        <a href="/books/list" class="btn btn-success">View Inventory</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

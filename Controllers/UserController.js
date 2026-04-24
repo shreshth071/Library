@@ -1,6 +1,8 @@
 const bcrypt = require('bcryptjs');
 const { log } = require('console');
 const Users = require('../Models/Users');
+const Books = require('../Models/Book');
+
 
 const saltRound = 10;
 
@@ -50,8 +52,14 @@ async function getUser(req, res) {
             if (isMatch) {
                 // Check if the user is admin (userType 1)
                 if (user.userType == 1) {
+                    const userCount = await Users.countDocuments();
+                    const bookCount = await Books.countDocuments();
                     return res.render('home', {
-                        user: user
+                        user: user,
+                        stats: {
+                            users: userCount,
+                            books: bookCount
+                        }
                     }); // Render admin home page
                 } else {
                     return res.render('userHome', {
@@ -134,11 +142,53 @@ async function  deleteUser(req,res) {
         
     }
 }
+
+async function getDashboard(req, res) {
+    try {
+        const userCount = await Users.countDocuments();
+        const bookCount = await Books.countDocuments();
+        
+        // Fallback user if not in session
+        const user = { FirstName: 'Admin', LastName: '' };
+        
+        res.render('home', {
+            user: user,
+            stats: {
+                users: userCount,
+                books: bookCount
+            }
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error loading dashboard");
+    }
+}
+
+async function getSettings(req, res) {
+    try {
+        // Fetch default admin for now (since no session)
+        let user = await Users.findOne({ email: 'admin@rdec.in' });
+        
+        if (!user) {
+            user = { FirstName: 'Admin', LastName: '', email: 'admin@rdec.in' };
+        }
+        
+        res.render('settings', {
+            user: user
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error loading settings");
+    }
+}
+
 module.exports = {
     addUser,
     getUser,
     getUsers,
     getUserForEdit,
     UpdateUser,
-    deleteUser
+    deleteUser,
+    getDashboard,
+    getSettings
 }

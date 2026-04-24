@@ -1,210 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - Book Management</title>
+    <title>Sign Up - Library Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* General Body Styles */
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Nunito', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: linear-gradient(135deg, #023e8a, #ade8f4);
-            position: relative;
-        }
-
-        /* Main Container Styles */
-        .main-container {
-            width: 100%;
-            position: fixed;
-        }
-
-        /* Form Container Styles */
-        .container {
-            width: 40%;
-            margin: 20px;
-            padding: 40px;
-            padding-top: 100px;
-            background: rgba(255, 255, 255, 0.4); /* Match the opacity from login page */
-            backdrop-filter: blur(10px);
-            border-radius: 25px; /* More spherical corners */
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-            text-align: left;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            height: 500px;
-            overflow-y: auto; /* Keep scroll bar */
-            z-index: 2;
-            left: 140px;
-        }
-
-        /* Book Icon - Positioned on top of the form */
-        .logo {
-            position: fixed;
-            top: 20px;
-            left: calc(50% - 40px);
-            width: 80px;
-            height: 80px;
-            z-index: 10;
-        }
-
-        /* Form Heading */
-        .container h1 {
-            margin-bottom: 20px;
-            color: #012a4a;
-            font-size: 28px;
-            text-align: center;
-        }
-
-        /* Input Field Styles */
-        input[type="text"],
-        input[type="password"],
-        input[type="email"] {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: none;
-            border-radius: 10px; /* Rounder input fields */
-            background: rgba(242, 242, 242, 0.8);
-            border: 1px solid #ccc;
-            color: #333;
-            transition: border-color 0.3s;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: #023e8a;
-        }
-
-        /* Button Styles */
-        .container button {
-            width: 100%;
-            padding: 12px;
-            background-color: #023e8a;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-            font-weight: bold;
-        }
-
-        .container button:hover {
-            background-color: #01497c;
-            transform: translateY(-2px);
-        }
-
-        /* Sign-in Link Styles */
-        .signin-link {
-            text-align: center;
-            margin-top: 10px;
-            color: #333;
-        }
-
-        .signin-link a {
-            color: #023e8a;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .signin-link a:hover {
-            text-decoration: underline;
-        }
-
-        /* Right side - 3D Animation Styles */
-        .right-image {
-            position: absolute;
-            top: 0;
-            left: 350px;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-
-        .right-image iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 0; /* No border-radius for full screen */
+            background: #f4f7f6;
             overflow: hidden;
         }
 
-        /* Responsive Styles */
-        @media (max-width: 800px) {
-            .main-container {
-                flex-direction: column;
-                align-items: center;
-            }
+        .signup-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            z-index: 10;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
 
-            .container,
-            .right-image {
-                width: 90%;
-                margin-top: 20px;
-            }
+        .signup-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
 
-            .container {
-                padding-top: 80px;
-                height: auto;
-            }
+        .signup-header i {
+            font-size: 3rem;
+            color: #1cc88a;
+            margin-bottom: 10px;
+        }
 
-            .logo {
-                top: -30px;
-                width: 80px;
-            }
+        .signup-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-control:focus {
+            border-color: #1cc88a;
+            background: white;
+            box-shadow: 0 0 0 0.2rem rgba(28, 200, 138, 0.25);
+            outline: none;
+        }
+
+        .signup-btn {
+            width: 100%;
+            padding: 12px;
+            background: #1cc88a;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .signup-btn:hover {
+            background: #17a673;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(28, 200, 138, 0.4);
+        }
+
+        .footer-links {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .footer-links a {
+            color: #1cc88a;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .bg-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.3;
         }
     </style>
 </head>
-
 <body>
+    <div class="bg-animation">
+        <iframe src='https://my.spline.design/robotinteractiveevents-5864473e1a2171a0a5458b8bd11d54bf/' frameborder='0' width='100%' height='100%'></iframe>
+    </div>
 
-    <!-- Main Container -->
-    <div class="main-container">
-
-        <!-- Form Container with Fixed Logo -->
-        <div class="container">
-            <img class="logo" src="https://img.icons8.com/ios-filled/100/023e8a/open-book.png" alt="Book Icon">
-            <h1>Sign Up</h1>
-            <form action="/add/user" method="post">
-                <label for="email"><b>Email</b></label>
-                <input type="email" placeholder="Enter Email" name="email" id="email" required>
-
-                <label for="FirstName"><b>First Name</b></label>
-                <input type="text" placeholder="Enter First Name" name="FirstName" id="FirstName" required>
-
-                <label for="LastName"><b>Last Name</b></label>
-                <input type="text" placeholder="Enter Last Name" name="LastName" id="LastName" required>
-
-                <label for="mobile"><b>Mobile No</b></label>
-                <input type="text" placeholder="Enter Mobile No" name="mobile" id="mobile" required>
-
-                <label for="country"><b>Country</b></label>
-                <input type="text" placeholder="Enter Country" name="country" id="country" required>
-
-                <label for="Password"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="PassWord" id="Password" required>
-
-                <label for="ConfirmPassword"><b>Confirm Password</b></label>
-                <input type="password" placeholder="Confirm Password" name="ConfirmPass" id="ConfirmPassword" required>
-
-                <button type="submit" class="registerbtn">Sign Up</button>
-            </form>
-            <div class="signin-link">
-                <p>Already have an account? <a href="/login">Log in</a>.</p>
-            </div>
+    <div class="signup-card">
+        <div class="signup-header">
+            <i class="fas fa-user-plus"></i>
+            <h1>Create Account</h1>
+            <p class="text-muted">Join the library management system</p>
         </div>
 
-        <!-- 3D Animation -->
-        <div class="right-image">
-            <iframe src='https://my.spline.design/robotinteractiveevents-5864473e1a2171a0a5458b8bd11d54bf/' frameborder='0' width='100%' height='100%'></iframe>
+        <form action="/add/user" method="post">
+            <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" name="email" class="form-control" placeholder="example@mail.com" required>
+            </div>
+
+            <div class="row" style="display: flex; gap: 15px;">
+                <div class="form-group" style="flex: 1;">
+                    <label class="form-label">First Name</label>
+                    <input type="text" name="FirstName" class="form-control" placeholder="John" required>
+                </div>
+                <div class="form-group" style="flex: 1;">
+                    <label class="form-label">Last Name</label>
+                    <input type="text" name="LastName" class="form-control" placeholder="Doe" required>
+                </div>
+            </div>
+
+            <div class="row" style="display: flex; gap: 15px;">
+                <div class="form-group" style="flex: 1;">
+                    <label class="form-label">Mobile Number</label>
+                    <input type="text" name="mobile" class="form-control" placeholder="1234567890" required>
+                </div>
+                <div class="form-group" style="flex: 1;">
+                    <label class="form-label">Country</label>
+                    <input type="text" name="country" class="form-control" placeholder="USA" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" name="PassWord" class="form-control" placeholder="••••••••" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Confirm Password</label>
+                <input type="password" name="ConfirmPass" class="form-control" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="signup-btn">Sign Up</button>
+        </form>
+
+        <div class="footer-links">
+            <p>Already have an account? <a href="/login">Log in here</a></p>
         </div>
     </div>
 </body>
-
 </html>

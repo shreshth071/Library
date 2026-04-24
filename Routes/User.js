@@ -30,4 +30,10 @@ router.post('/update/user/:id',(req,res)=>{
 router.get('/delete/user/page/:id',(req,res)=>{
     UserContoller.deleteUser(req,res);
 })
+router.get('/dashboard',(req,res)=>{
+    UserContoller.getDashboard(req,res);
+})
+router.get('/settings',(req,res)=>{
+    UserContoller.getSettings(req,res);
+})
 module.exports = router

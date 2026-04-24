@@ -1,116 +1,128 @@
 <%- include('./base/header.ejs') %>
 
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
+    .main-content {
+        margin-left: 250px;
+        padding: 80px 40px 40px 40px;
         background-color: #f8f9fa;
+        min-height: 100vh;
+        width: calc(100% - 250px);
     }
 
-    .content {
-        padding: 20px;
-        background-color: #fff;
-        max-width: 800px;
-        max-height: 600px; /* Set a max height for scrolling */
-        margin: 50px auto;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-        overflow-y: auto; /* Enable vertical scrolling */
+    .form-card {
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        max-width: 900px;
+        margin: 0 auto;
     }
 
-    .content h1 {
-        font-size: 2rem;
-        color: #343a40;
-        margin-bottom: 20px;
-        text-align: center;
+    .form-section-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #f1f3f5;
+        padding-bottom: 10px;
     }
 
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    .form-group label {
-        display: block;
-        margin-bottom: 10px;
-        font-weight: bold;
+    .form-label {
+        font-weight: 600;
         color: #495057;
+        margin-bottom: 8px;
     }
 
-    .form-group input {
-        width: 100%;
-        padding: 10px;
+    .form-control {
+        border-radius: 8px;
+        padding: 12px;
         border: 1px solid #ced4da;
-        border-radius: 5px;
-        font-size: 1rem;
-        color: #495057;
-    }
-
-    .form-group input[type="file"] {
-        padding: 0;
     }
 
     .submit-btn {
-        background-color: #007bff;
-        color: white;
+        background-color: #f6c23e;
+        color: #333;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: bold;
         border: none;
-        padding: 12px 20px;
-        font-size: 1.1rem;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        display: block;
-        margin: 20px auto;
+        transition: all 0.3s ease;
     }
 
     .submit-btn:hover {
-        background-color: #0056b3;
+        background-color: #e5b12a;
+        transform: translateY(-2px);
     }
 </style>
 
-<%- include('./base/sideBar.ejs') %>
+<div class="main-container d-flex">
+    <%- include('./base/sideBar.ejs') %>
+    
+    <div class="main-content flex-grow-1">
+        <div class="form-card">
+            <h1 class="h3 mb-4 text-gray-800">Update Book Details</h1>
+            
+            <form action="/book/update/<%= book._id %>" method="POST">
+                <div class="form-section-title">
+                    <i class="fas fa-edit mr-2 text-warning"></i> Modify Information
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label class="form-label">Book Title</label>
+                        <input type="text" name="bookTitle" class="form-control" value="<%= book.bookTitle %>" required>
+                    </div>
+                </div>
 
-<div style="width: 80%; margin-left: 30%; position: fixed; top: 30px; bottom: -20px;" class="content">
-    <h1>Update Book</h1>
-    <form action="/book/update/<%= book._id %>" method="POST" >
-        <div class="form-group">
-            <label for="book-title">Book Title</label>
-            <input type="text" id="book-title" name="bookTitle" value="<%= book.bookTitle %>" placeholder="Enter book title" required>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Publisher</label>
+                        <input type="text" name="publisher" class="form-control" value="<%= book.publisher %>" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Price (USD)</label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="text" name="price" class="form-control" value="<%= book.price %>" required pattern="^\d+(\.\d{1,2})?$" title="Enter a valid price">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Language</label>
+                        <input type="text" name="language" class="form-control" value="<%= book.language %>" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Edition</label>
+                        <input type="text" name="edition" class="form-control" value="<%= book.edition %>" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Pages</label>
+                        <input type="number" name="noOfPages" class="form-control" value="<%= book.noOfPages %>" required min="1">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Country</label>
+                        <input type="text" name="country" class="form-control" value="<%= book.country %>" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">ISBN</label>
+                        <input type="text" name="isbn" class="form-control" value="<%= book.isbn %>">
+                    </div>
+                </div>
+
+                <hr class="my-4">
+                
+                <div class="text-right">
+                    <a href="/books/list" class="btn btn-light mr-2">Cancel</a>
+                    <button type="submit" class="submit-btn">Update Book Details</button>
+                </div>
+            </form>
         </div>
-        <div class="form-group">
-            <label for="publisher">Publisher</label>
-            <input type="text" id="publisher" name="publisher" value="<%= book.publisher %>" placeholder="Enter publisher" required>
-        </div>
-        <div class="form-group">
-            <label for="price">Price (USD)</label>
-            <input type="text" id="price" name="price" value="<%= book.price %>" placeholder="Enter price" required pattern="^\d+(\.\d{1,2})?$" title="Please enter a valid price (e.g., 16.99)">
-        </div>
-        <div class="form-group">
-            <label for="language">Language</label>
-            <input type="text" id="language" name="language" value="<%= book.language %>" placeholder="Enter language" required>
-        </div>
-        <div class="form-group">
-            <label for="edition">Edition</label>
-            <input type="text" id="edition" name="edition" value="<%= book.edition %>" placeholder="Enter edition" required>
-        </div>
-        <div class="form-group">
-            <label for="noOfPages">Number of Pages</label>
-            <input type="number" id="noOfPages" name="noOfPages" value="<%= book.noOfPages %>" placeholder="Enter number of pages" required min="1">
-        </div>
-        <div class="form-group">
-            <label for="isbn">ISBN</label>
-            <input type="text" id="isbn" name="isbn" placeholder="Enter ISBN" title="Please enter a valid ISBN (e.g., 978-0062315007)">
-        </div>
-        <div class="form-group">
-            <label for="country">Country</label>
-            <input type="text" id="country" name="country" value="<%= book.country %>" placeholder="Enter country" required>
-        </div>
-        <div class="form-group">
-            <label for="bookImage">Book Image</label>
-            <input type="file" id="bookImage" name="bookImage">
-        </div>
-        <button  type="submit" class="submit-btn">Update</button>
-    </form>
+    </div>
 </div>
 
 <%- include('./base/footer.ejs') %>

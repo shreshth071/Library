@@ -1,42 +1,112 @@
 <%- include('./base/header.ejs') %>
+
 <style>
-    .button1 {
-        width: 80px; /* Adjust the width as needed */
-        margin-right: 100%;
+    .main-content {
+        margin-left: 250px;
+        padding: 80px 40px 40px 40px;
+        background-color: #f8f9fa;
+        min-height: 100vh;
+        width: calc(100% - 250px);
+    }
+
+    .table-container {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+    .table thead th {
+        background-color: #f8f9fc;
+        color: #4e73df;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        border-bottom: 2px solid #e3e6f0;
+        padding: 15px;
+    }
+
+    .table tbody td {
+        padding: 15px;
+        vertical-align: middle;
+        color: #5a5c69;
+        border-bottom: 1px solid #e3e6f0;
+    }
+
+    .book-thumb {
+        width: 45px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .action-btn {
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-right: 5px;
     }
 </style>
-<table class="table text-center" >
-    <thead>
-        <tr>
-            <th>BookImage</th>
-            <th>BookTitle</th>
-            <th>Publisher</th>
-            <th>Price</th>
-            <th>Language</th>
-            <th>Edition</th>
-            <th>No Of Pages</th>
-            <th>ISBN</th>
-            <th>Country</th>
-            <th style="padding-left: 7%;" >Actions</th>
 
-        </tr>
-    </thead>
-    <% books.forEach((book)=>{ %>
-        <tr>
-            <td><img src="<%= book.bookImage %>" width="20px" height="20px"></td>
-            <td><%= book.bookImage %></td>
-            <td><%= book.bookTitle %></td>
-            <td><%= book.publisher %></td>
-            <td><%= book.price %></td>
-            <td><%= book.language %></td>
-            <td><%= book.edition %></td>
-            <td><%= book.noOfPages %></td>
-            <td><%= book.isbn %></td> 
-            <td><%= book.country %></td>
-            <td><a href="#" class="btn btn-warning button1">edit</a></td>
-            <td><a href="/book/delete/<%= book._id %>" class="btn btn-danger button1">Delete</a></td>
-        </tr>
-   <% }) %>
-</table>
+<div class="main-container d-flex">
+    <%- include('./base/sideBar.ejs') %>
+    
+    <div class="main-content flex-grow-1">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="h3 mb-0 text-gray-800">Inventory Management</h2>
+            <a href="/book/add/page" class="btn btn-success shadow-sm">
+                <i class="fas fa-plus fa-sm text-white-50 mr-2"></i> Add New Book
+            </a>
+        </div>
 
-<%- include('./base/footer.ejs')%>
+        <div class="table-container">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Cover</th>
+                            <th>Book Details</th>
+                            <th>Publisher</th>
+                            <th>Price</th>
+                            <th>Stock info</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% books.forEach((b)=>{ %>
+                            <tr>
+                                <td>
+                                    <img src="<%= b.bookImage || 'https://via.placeholder.com/45x60?text=No+Cover' %>" class="book-thumb" alt="Book Cover">
+                                </td>
+                                <td>
+                                    <div class="font-weight-bold text-dark"><%= b.bookTitle %></div>
+                                    <div class="small text-muted">ISBN: <%= b.isbn || 'N/A' %></div>
+                                </td>
+                                <td><%= b.publisher %></td>
+                                <td><span class="font-weight-bold text-success">$<%= b.price %></span></td>
+                                <td>
+                                    <div class="small">Lang: <%= b.language %></div>
+                                    <div class="small text-muted"><%= b.noOfPages %> Pages</div>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <a href="/book/update/page/<%= b._id %>" class="btn btn-warning btn-sm action-btn">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="/book/delete/<%= b._id %>" class="btn btn-danger btn-sm action-btn" onclick="return confirm('Delete this book?')">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('./base/footer.ejs') %>

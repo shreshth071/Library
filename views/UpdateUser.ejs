@@ -1,40 +1,93 @@
-
 <%- include('./base/header.ejs') %>
-    <div class="container">
-        <div class="alert bg-success my-3">
-            <h4 class="text-center" style="color: aliceblue;">Update Student </h4>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col"></div>
-            <div class="col">
-                <form action="/update/user/<%= user._id %>" method="post">
-                    <label class="form-lable" for="email"><b>Email</b></label>
-                    <input class="form-control" type="text" placeholder="Enter Email" name="email" value="<%= user.email %>" id="email" required>
-    
-                    <label class="form-lable" for="FirstName"><b>First Name</b></label>
-                    <input class="form-control" type="text" placeholder="Enter Name" name="FirstName" value="<%= user.FirstName %>" id="FirstName" required>
-    
-                    <label class="form-lable" for="LastName"><b>Last Name</b></label>
-                    <input class="form-control"  type="text" placeholder="Enter Name" name="LastName" value="<%= user.LastName %>" id="LastName" required>
-    
-                    <label class="form-lable" for="Password"><b>Password</b></label>
-                    <input class="form-control" type="password" placeholder="Enter Password" name="PassWord" value="<%= user.PassWord %>" id="Password" required>
-    
-                    <label class="form-lable" for="Confirm Password"><b>Confirm Password</b></label>
-                    <input class="form-control" type="password" placeholder="Enter Password" name="ConfirmPass" value="<%= user.ConfirmPass %>" id="ConfirmPassword" required>
-    
-                    <label class="form-lable" for="Mobile Number"><b>Mobile Number</b></label>
-                    <input class="form-control" type="number" placeholder="Mobile Number" name="MobileNo" value="<%= user.MobileNo %>" id="MobileNo" required>
-    
-                    <hr>
-                    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-                    <button type="submit" class="registerbtn">Update</button>
-                </form>
-            </div>
-            <div class="col"></div>
 
+<style>
+    .main-content {
+        margin-left: 250px;
+        padding: 80px 40px 40px 40px;
+        background-color: #f8f9fa;
+        min-height: 100vh;
+        width: calc(100% - 250px);
+    }
+
+    .form-card {
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #495057;
+        margin-bottom: 8px;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        padding: 12px;
+        margin-bottom: 20px;
+    }
+
+    .submit-btn {
+        background-color: #4e73df;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: bold;
+        border: none;
+        width: 100%;
+        transition: all 0.3s ease;
+    }
+
+    .submit-btn:hover {
+        background-color: #2e59d9;
+    }
+</style>
+
+<div class="main-container d-flex">
+    <%- include('./base/sideBar.ejs') %>
+    
+    <div class="main-content flex-grow-1">
+        <div class="form-card">
+            <h2 class="h3 mb-4 text-gray-800 text-center">Update User Profile</h2>
+            <form action="/update/user/<%= user._id %>" method="post">
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input class="form-control" type="email" name="email" value="<%= user.email %>" required>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label class="form-label">First Name</label>
+                        <input class="form-control" type="text" name="FirstName" value="<%= user.FirstName %>" required>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="form-label">Last Name</label>
+                        <input class="form-control" type="text" name="LastName" value="<%= user.LastName %>" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Mobile Number</label>
+                    <input class="form-control" type="text" name="MobileNo" value="<%= user.MobileNo %>" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">New Password (Leave blank to keep current)</label>
+                    <input class="form-control" type="password" name="PassWord" placeholder="Enter new password">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Confirm New Password</label>
+                    <input class="form-control" type="password" name="ConfirmPass" placeholder="Confirm new password">
+                </div>
+
+                <button type="submit" class="submit-btn">Update Profile</button>
+            </form>
         </div>
     </div>
-<%- include('./base/footer.ejs')%>
+</div>
+
+<%- include('./base/footer.ejs') %>

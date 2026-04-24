@@ -1,90 +1,104 @@
 <%- include('./base/header.ejs') %>
+
 <style>
-
-
-    .main-container {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        height: 100vh;
-        background-color: rgba(255, 255, 255, 0.9);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-        overflow: hidden;
+    .main-content {
+        margin-left: 250px;
+        padding: 80px 40px 40px 40px;
+        background-color: #f8f9fa;
+        min-height: 100vh;
+        width: calc(100% - 250px);
     }
 
-    .left-container {
-        padding: 10px;
-        width: 20%;
-        display: flex;
-        flex-direction: column;
-        justify-content: top;
-        background-size: cover; /* Cover the entire container */
-        background-position: center; /* Center the image */
-        background-color:  #3fbbeccb; /* Semi-transparent overlay */
+    .table-container {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     }
 
-    .left-container a{
-        margin: 10px;
+    .table thead th {
+        background-color: #f8f9fc;
+        color: #4e73df;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        border-bottom: 2px solid #e3e6f0;
+        padding: 15px;
     }
+
+    .table tbody td {
+        padding: 15px;
+        vertical-align: middle;
+        color: #5a5c69;
+        border-bottom: 1px solid #e3e6f0;
+    }
+
+    .action-btn {
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-right: 5px;
+    }
+
+    .badge-admin { background-color: #4e73df; color: white; }
+    .badge-user { background-color: #1cc88a; color: white; }
+</style>
+
+<div class="main-container d-flex">
+    <%- include('./base/sideBar.ejs') %>
     
+    <div class="main-content flex-grow-1">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="h3 mb-0 text-gray-800">User Management</h2>
+            <a href="/signup" class="btn btn-primary shadow-sm">
+                <i class="fas fa-user-plus fa-sm text-white-50 mr-2"></i> Add New User
+            </a>
+        </div>
 
-    .right-container {
-        width: 80%; /* Takes 60% of the width */
-        background-size: cover;
-        background-position: center;
-        display: flex;
-        justify-content: top;
-        align-items: center;
-        flex-direction: column; /* Centering content */
-        /* color: #fff; */
-    }
-
-</style>
-<div class="main-container">
-    <div class="left-container">
-      <a href="/users" class="btn btn-outline-success">Users LIst</a>
-      <a href="/books/list" class="btn btn-outline-success">Books</a>
-    </div>
-    <div class="right-container" >
-<style>
-    .button1 {
-        width: 80px; /* Adjust the width as needed */
-        margin-right: 100%;
-    }
-</style>
-<div class="container">
-    <div class="row">
-        <table class="table text-center" >
-            <thead>
-                <tr>
-                    <th>email</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>mobileNo</th>
-                    <th>password</th>
-                    <th>Last Login</th>
-                    <th style="padding-left: 7%;" >Actions</th>
-
-                </tr>
-            </thead>
-            <% users.forEach((user)=>{ %>
-                <tr>
-                    <td><%= user.email %></td>
-                    <td><%= user.FirstName %></td>
-                    <td><%= user.LastName %></td>
-                    <td><%= user.MobileNo %></td>
-                    <td><%= user.PassWord %></td>
-                    <td><%= user.lastLogin %></td>
-                    <td><a href="/edit/user/page/<%= user._id %>" class="btn btn-warning button1">edit</a></td>
-                    <td><a href="/delete/user/page/<%= user._id %>" class="btn btn-danger button1">Delete</a></td>
-                </tr>
-           <% }) %>
-        </table>
+        <div class="table-container">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>User Info</th>
+                            <th>Mobile</th>
+                            <th>Type</th>
+                            <th>Last Login</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% users.forEach((u)=>{ %>
+                            <tr>
+                                <td>
+                                    <div class="font-weight-bold text-dark"><%= u.FirstName %> <%= u.LastName %></div>
+                                    <div class="small text-muted"><%= u.email %></div>
+                                </td>
+                                <td><%= u.MobileNo %></td>
+                                <td>
+                                    <span class="badge <%= u.userType == 1 ? 'badge-admin' : 'badge-user' %>">
+                                        <%= u.userType == 1 ? 'Admin' : 'User' %>
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="small"><%= u.lastLogin ? u.lastLogin.toDateString() : 'Never' %></div>
+                                </td>
+                                <td>
+                                    <a href="/edit/user/page/<%= u._id %>" class="btn btn-warning btn-sm action-btn">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+                                    <a href="/delete/user/page/<%= u._id %>" class="btn btn-danger btn-sm action-btn" onclick="return confirm('Are you sure?')">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 
-    </div>
-    
-</div>
-
-<%- include('./base/footer.ejs')%>
+<%- include('./base/footer.ejs') %>

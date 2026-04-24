@@ -17,7 +17,7 @@ async function addBook(req,res){
         }
         await books.save();
         let books=await Book.find({});
-        res.render('booklist',{
+        res.render('bookList',{
             books: books
         })
     } catch(error){
