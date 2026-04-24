@@ -1,5 +1,5 @@
 let User = require('../Models/Users');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const saltRound = 10;
 
 async function createAdmin(){
