@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const connection = require('./Connection');
@@ -8,7 +9,7 @@ const app = express();
 const common = require('./helper/common');
 connection();
 // connection2();
-// common.createAdmin();
+common.createAdmin();
 app.use(user);
 app.use(book);
 app.use(express.json());

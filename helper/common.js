@@ -4,9 +4,12 @@ const saltRound = 10;
 
 async function createAdmin(){
     try {
-        let password = bcrypt.hashSync('55555',saltRound
-
-        )
+        let existingAdmin = await User.findOne({ email: 'admin@rdec.in' });
+        if (existingAdmin) {
+            console.log("Admin user already exists.");
+            return;
+        }
+        let password = bcrypt.hashSync('55555',saltRound)
         let adminData = {
             FirstName : 'Devang',
             LastName : 'Singh',

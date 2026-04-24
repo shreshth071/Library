@@ -12,9 +12,9 @@ async function addUser(req,res) {
         let password = bcrypt.hashSync(req.body.PassWord,saltRound);
         console.log(password);
         //check id has been alredy registerd or not;
-        let userExits = await Users.find({email:req.body.email})
+        let userExits = await Users.findOne({email:req.body.email})
         if(userExits){
-            res.end("<h1>User Already Exists </h1>")
+            return res.end("<h1>User Already Exists </h1>")
         }
         let user = new Users(req.body);
         if (req.body.PassWord==req.body.ConfirmPass) {
