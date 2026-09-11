@@ -3,9 +3,11 @@
   publish = "public"
 
 [functions]
-  included_files = ["views/**", "helper/**", "Routes/**", "Models/**", "Controllers/**", "Connection.js"]
+  included_files = ["views/**"]
 
 [[redirects]]
   from = "/*"
   to = "/.netlify/functions/api"
   status = 200
+  force = true
+

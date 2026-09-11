@@ -1,72 +1,81 @@
 # 📚 Library Management System
 
-A web-based Library Management System built using **HTML, CSS, JavaScript**, and **Firebase**. It allows students and administrators to manage book records, handle issue/return workflows, and maintain student data in real-time — all through a clean, responsive user interface.
+A full-stack web-based Library Management System built using **Node.js, Express, EJS, MongoDB (Mongoose)**, and **Cloudinary**. Deployed seamlessly on **Netlify** using Netlify Functions.
 
 ---
 
-### 🛠️ Tech Stack & Tools
-- **Languages**: HTML, CSS, JavaScript
-- **Frameworks/Libraries**: Bootstrap (for styling), Firebase SDK
-- **Database**: Firebase Firestore / Realtime Database
-- **Hosting/Backend**: Firebase Hosting (optional)
-- **Others**: Firebase Authentication (if enabled)
+## 🛠️ Tech Stack & Tools
+- **Backend**: Node.js, Express.js, `serverless-http`
+- **Frontend / Templating**: EJS, Bootstrap 5, FontAwesome
+- **Database**: MongoDB Atlas (Mongoose ORM)
+- **Image Storage**: Cloudinary
+- **Deployment**: Netlify Functions
 
 ---
 
-### 🎯 Features
-- ✅ Add, edit, and delete books
-- ✅ Student registration and management
-- ✅ Book issuing and return system
-- ✅ Search functionality for books and students
-- ✅ Real-time data sync via Firebase
-- ✅ Responsive UI with Bootstrap
+## 🚀 Deploying to Netlify
+
+### Option 1: Deploy via GitHub (Recommended)
+1. Push your repository to GitHub / GitLab / Bitbucket.
+2. Log in to [Netlify](https://app.netlify.com/) and click **Add new site > Import an existing project**.
+3. Select your repository.
+4. Netlify will automatically read `netlify.toml` with the following build settings:
+   - **Publish directory**: `public`
+   - **Functions directory**: `netlify/functions`
+5. Under **Site Configuration > Environment Variables**, add:
+   - `MONGODB_URI`: Your MongoDB Atlas connection string (`mongodb+srv://<user>:<password>@cluster0.../library`)
+   - `CLOUDINARY_CLOUD_NAME`: (Optional) Your Cloudinary Cloud Name
+   - `CLOUDINARY_API_KEY`: (Optional) Your Cloudinary API Key
+   - `CLOUDINARY_API_SECRET`: (Optional) Your Cloudinary API Secret
+6. Click **Deploy Site**.
 
 ---
 
-### 📸 UI Preview
-> Add these images in a `/screenshots` folder in your repo
-
-![Home](./screenshots/home.png)  
-![Books](./screenshots/books.png)  
-![Issue Page](./screenshots/issue.png)
-
----
-
-### 🎥 Educational Sources
-> The following videos were used **only for educational purposes**, not for promotion.
-
-- 📺 [Library Management System Tutorial - YouTube](https://www.youtube.com/)
-- 📺 [Firebase Integration Guide - YouTube](https://www.youtube.com/)
-
----
-
-### 📦 Setup Instructions
-1. **Clone the Repository**  
+### Option 2: Deploy via Netlify CLI
+1. Install Netlify CLI:
    ```bash
-   git clone https://github.com/shreshth071/Library.git
+   npm install -g netlify-cli
+   ```
+2. Login to your Netlify account:
+   ```bash
+   netlify login
+   ```
+3. Initialize and deploy:
+   ```bash
+   netlify init
+   netlify deploy --prod
    ```
 
-2. **Add Firebase Config**  
-   Replace the config values in `firebase-config.js` with your Firebase project credentials.
+---
 
-3. **Open in Browser**  
-   Just open `index.html` in any modern browser and start using the system.
+## 💻 Local Development Setup
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/shreshth071/Library.git
+   cd Library
+   ```
+
+2. **Install Dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Configure Environment Variables**
+   Create a `.env` file in the root directory:
+   ```env
+   MONGODB_URI=your_mongodb_connection_string
+   PORT=3000
+   ```
+
+4. **Start the Development Server**
+   ```bash
+   npm start
+   ```
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-### 🧾 Folder Structure
-```
-Library/
-├── index.html
-├── style.css
-├── app.js
-├── firebase-config.js
-├── /assets/
-├── /screenshots/
-└── README.md
-```
-
----
-
-### 📄 License
+## 📄 License
 This project is licensed under the ISC License. See the [LICENSE.md](./LICENSE.md) file for details.
+

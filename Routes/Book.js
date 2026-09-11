@@ -3,9 +3,9 @@ const multer = require('multer');
 const BookController = require('../Controllers/BookController');
 const router = express.Router();
 const upload = multer({
-     storage:multer.diskStorage({}),
-     limits: {fileSize: 10*1024*1024}
- })
+     storage: multer.memoryStorage(),
+     limits: { fileSize: 10 * 1024 * 1024 }
+});
 router.use(express.json());
 router.use(express.urlencoded({extended : false}));
 router.get('/',(req,res)=>{

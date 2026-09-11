@@ -1,45 +1,43 @@
 const Books = require('../Models/Book');
 const cloudinary = require("cloudinary").v2;
 
-async function addBook(req,res){
-    try{
+const { Readable } = require('stream');
+
+async function addBook(req, res) {
+    try {
         let book = new Books(req.body);
-        if(req.file){
+        if (req.file) {
             cloudinary.config({ 
-                cloud_name: 'dd47rge5f', 
-                api_key: '768345956955758', 
-                api_secret: 'urFrQMIi4MzxgVmfkYVV6LjJQjw' // Click 'View API Keys' above to copy your API secret
+                cloud_name: process.env.CLOUDINARY_CLOUD_NAME || 'dd47rge5f', 
+                api_key: process.env.CLOUDINARY_API_KEY || '768345956955758', 
+                api_secret: process.env.CLOUDINARY_API_SECRET || 'urFrQMIi4MzxgVmfkYVV6LjJQjw'
             });
-            const result = await cloudinary.uploader.upload(req.file.path);
-            console.log(result.secure.url,'upload.secure.url');
-            console.log(req.file,'req.file');
-            book.bookImage=result.secure_url
+
+            const uploadStream = () => {
+                return new Promise((resolve, reject) => {
+                    const stream = cloudinary.uploader.upload_stream(
+                        { folder: "library_books" },
+                        (error, result) => {
+                            if (result) resolve(result);
+                            else reject(error);
+                        }
+                    );
+                    Readable.from(req.file.buffer).pipe(stream);
+                });
+            };
+
+            const result = await uploadStream();
+            book.bookImage = result.secure_url;
         }
-        await books.save();
-        let books=await Book.find({});
-        res.render('bookList',{
+        await book.save();
+        let books = await Books.find({});
+        return res.render('bookList', {
             books: books
-        })
-    } catch(error){
-        console.log(error);
+        });
+    } catch (error) {
+        console.error("Error adding book:", error);
+        return res.status(500).send("Error adding book");
     }
-    console.log("Reciver from data :" , req.body);
-    // console.log("hrer..")
-    console.log(req.file,'req.file');
-    res.end("<h1>Uploading in process....</h1>");
-    // try {
-    //     console.log(req.body);
-    //     let Book = new Books(req.body);
-    //     Book.isbn = await Book._id;
-    //     await Book.save();
-    //     let books = await Books.find({});
-    //     res.render('bookList',{
-    //         books:books
-    //     })  
-    // } catch (err) {
-    //     console.log(err);
-        
-    // }
 }
 async function getBooks(req,res) {
     try {
